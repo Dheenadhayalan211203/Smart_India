@@ -85,7 +85,7 @@ const Counter = () => {
             const stopnumber = selectedRouteData.stops.indexOf(source)+1;
             const destinationstopnumber = selectedRouteData.stops.indexOf(destination)-1;
             
-            const response = await axios.post("http://localhost:5000/counter", { 
+            const response = await axios.post("https://smart-india-4.onrender.com/counter", { 
                 source, 
                 destination,
                 routenumber: selectedRouteData.routeno,
