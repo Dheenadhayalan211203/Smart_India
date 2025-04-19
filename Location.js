@@ -47,8 +47,11 @@ const busDataSchema = new mongoose.Schema({
 const ticketSchema = new mongoose.Schema({
     source: String,
     destination: String,
-    email: String,
-    routeno: Number
+    routenumber:Number,
+    stopnumber:Number,
+    destinationstopnumber:Number,
+    onbstats:Boolean,
+    deonbstats:Boolean
 });
 
 const Ticket = mongoose.model('Ticket', ticketSchema);
@@ -65,8 +68,8 @@ function swap(str) {
 // Adding ticket
 app.post("/counter", async (req, res) => {
     try {
-        const { source, destination, email, routeno } = req.body;
-        const ticket = new Ticket({ source, destination, email, routeno });
+        const { source, destination,routenumber,stopnumber,destinationstopnumber,passengercount,onbstats,deonbstats  } = req.body;
+        const ticket = new Ticket({ source, destination,routenumber,stopnumber,destinationstopnumber,passengercount,onbstats,deonbstats });
         const savedTicket = await ticket.save();
         // res.send({ id: savedTicket._id });
         console.log()
@@ -100,11 +103,11 @@ app.post("/verify", async (req, res) => {
         const count = await Ticket.findById(matchedTicket)
         // console.log(count.__v);
         if (count.__v == 0) {
-            await Ticket.findByIdAndUpdate(matchedTicket, { $set: { __v: 1 } }, { new: true })
+            await Ticket.findByIdAndUpdate(matchedTicket, { $set: { __v: 1 } , onbstats:true}, { new: true })
             return res.json("Passenger Boarded")
         }
         else if (count.__v == 1) {
-            await Ticket.findByIdAndUpdate(matchedTicket, { $set: { __v: 2 } }, { new: true });
+            await Ticket.findByIdAndUpdate(matchedTicket, { $set: { __v: 2 } , deonbstats:true }, { new: true });
             return res.json("Travel completed")
         } else {
             return res.json("Ticket already used")

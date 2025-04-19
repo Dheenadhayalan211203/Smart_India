@@ -1,119 +1,209 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaBus, FaMapMarkerAlt, FaTicketAlt, FaRupeeSign } from "react-icons/fa";
+import './Counter.css'
 
+const Counter = () => {
+    const navigate = useNavigate();
 
-const Counters = () => {
-    
-    const navigate= useNavigate()
-    const tk = { stops: ["Thiruvanmayur", "Adayaru", "Guindy", "Ashok Pillar", "Vadapalani", "Koyambedu"], routeno: 1, mapurl: "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d62193.39638274079!2d80.18423637227335!3d13.030114096228163!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x3a525d5b9b3bfc6f%3A0x6959f97669f90baa!2sThiruvanmiyur%2C%20Chennai%2C%20Tamil%20Nadu!3m2!1d12.983026899999999!2d80.2594001!4m5!1s0x3a5266b2082873a1%3A0x7f2b6f60e42a31f8!2sKoyambedu%2C%20Chennai%2C%20Tamil%20Nadu!3m2!1d13.0693568!2d80.1948314!5e0!3m2!1sen!2sin!4v1725436652287!5m2!1sen!2sin" };
-    const tn = { stops: ["Thiruvanmayur", "Thoraipakam", "Karapakam", "Solinganallur", "Navalur"], routeno: 2, mapurl: "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d124444.35807632837!2d80.16049223542794!3d12.915035691162403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x3a525d5b9b3bfc6f%3A0x6959f97669f90baa!2sThiruvanmiyur%2C%20Chennai%2C%20Tamil%20Nadu!3m2!1d12.983026899999999!2d80.2594001!4m5!1s0x3a525a51439fd9f3%3A0x5fdacd19ed90126c!2sNavalur%2C%20Tamil%20Nadu%20600130!3m2!1d12.8459348!2d80.22652289999999!5e0!3m2!1sen!2sin!4v1725463661891!5m2!1sen!2sin" };
-    const tm = { stops: ["Thiruvanmayur", "Velachery", "Ram nagar", "Madipakam", "Medavakam"], routeno: 3, mapurl: "https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d62213.32222819287!2d80.17933187188422!3d12.95055391471845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e0!4m5!1s0x3a525d5b9b3bfc6f%3A0x6959f97669f90baa!2sThiruvanmiyur%2C%20Chennai%2C%20Tamil%20Nadu!3m2!1d12.983026899999999!2d80.2594001!4m5!1s0x3a525c1c2ab10c01%3A0x8f33fe8bebe2b89c!2sMedavakkam%2C%20Chennai%2C%20Tamil%20Nadu!3m2!1d12.9200089!2d80.1919901!5e0!3m2!1sen!2sin!4v1725463755174!5m2!1sen!2sin" };
-    
-    const [route, setRoute] = useState(tk.stops);
-    const [mapUrl, setMapUrl] = useState(tk.mapurl);
-
-    const [source, setSource] = useState(null);
-    const [destination, setDestination] = useState(null);
-    const [routeno, setrouteno] = useState(null);
-    const [email, setEmail] = useState('');
-
-    const handleRouteChange = (routeKey) => {
-        if (routeKey === "tk") {
-            setRoute(tk.stops);
-            setMapUrl(tk.mapurl);
-            setrouteno(tk.routeno);
-        } else if (routeKey === "tn") {
-            setRoute(tn.stops);
-            setMapUrl(tn.mapurl);
-            setrouteno(tn.routeno);
-        } else if (routeKey === "tm") {
-            setRoute(tm.stops);
-            setMapUrl(tm.mapurl);
-            setrouteno(tm.routeno);
+    const routes = {
+        route1: { 
+            name: "Chennai central to Panangal park", 
+            stops: ["General Hospital Road, Evening Bazaar", "EVR Periyar Salai, Periamet, Ward 58", "EVR Periyar Salai, Periamet", "Gandhi Irwin Road", "Whannels Road", "Sacred Heart Shrine", "Pantheon Road 1", "Pantheon Road 2", "Pantheon Road 3", "College Road", "Sankara Nethralaya", "Sankara Nethralaya, College Road", "Haddows Road", "Uttamar Gandhi Salai", "Uttamar Gandhi Salai 2", "Valluvar Kottam High Road, Ward 110", "Valluvar Kottam High Road, Mahalingapuram", "Valluvar Kottam", "Valluvar Kottam High Road stop 2", "Thirumalai Road", "Sree Tantric Astrology", "North Usman Road"],
+            routeno: 1,
+            fare: "₹25",
+            mapUrl: "https://maps.google.com/maps?q=Thiruvanmiyur+to+Koyambedu&output=embed"
+        },
+        route2: { 
+            name: "Chennai central to Royapettah", 
+            stops: ["General Hospital Road", "Tamil Nadu Government Multi Super Speciality Hospital MOUNT Road", "Anna Salai (Mount Road)", "General Patters Road", "Royapuram", "Royapuram stop 2", "(AMMK) Party Headquarters", "Peters Road"],
+            routeno: 2,
+            fare: "₹20",
+            mapUrl: "https://maps.google.com/maps?q=Thiruvanmiyur+to+T.Nagar&output=embed"
+        },
+        route3: { 
+            name: "Chennai central to Vysarpadi", 
+            stops: ["General Hospital Road", "Platform 2A / 3", "Wall Tax Road 1", "Wall Tax Road 2", "Wall Tax Road 3", "Wall Tax Road 4", "Wall Tax Road 5", "Basin Bridge", "Erukkancheri High Road 1", "Erukkancheri High Road 2", "Erukkancheri High Road 3", "Moorthinagar Street", "Erukkancheri High Road 4"],
+            routeno: 3,
+            fare: "₹30",
+            mapUrl: "https://maps.google.com/maps?q=Thiruvanmiyur+to+Broadway&output=embed"
+        },
+        route4: { 
+            name: "Royapettah to Kodambakam", 
+            stops: ["The New College", "Sacred Heart Matric 1", "Sacred Heart Matric 2", "Sacred Heart Matric 3", "Oxford University Press", "Uttamar Gandhi Salai", "The Spring Hotel", "Doctor M.G.R. Salai", "The Spring Hotel", "Doctor M.G.R. Salai", "Dr MGR Salai 1", "Dr MGR Salai 2", "Dr MGR Salai 3", "Mamabalam Highway", "Bank of Baroda"],
+            routeno: 4,
+            fare: "₹30",
+            mapUrl: "https://maps.google.com/maps?q=Thiruvanmiyur+to+Broadway&output=embed"
+        },
+        route5: { 
+            name: "Kodambakkam to Koyambedu", 
+            stops: ["Dr Ambedkar Road", "Jawaharlal Nehru Road (100 Feet Road)", "Jawaharlal Nehru Road (100 Feet Road) stop 2", "Jawaharlal Nehru Road ward 127", "Jawaharlal Nehru Road ward 127 2", "Kaliamman Koil Street", "Kaliamman Koil Street stop 2", "CMWSSB Division 127", "Ward 145, Zone 11 Valasaravakkam", "CMWSSB Division 127 stop 2", "CMWSSB Division 127 stop 3"],
+            routeno: 5,
+            fare: "₹10 to 30",
+            mapUrl: "https://maps.google.com/maps?q=Thiruvanmiyur+to+Broadway&output=embed"
         }
     };
 
-    const handleSource = (stop) => {
+    const [selectedRoute, setSelectedRoute] = useState(null);
+    const [source, setSource] = useState(null);
+    const [destination, setDestination] = useState(null);
+    const [passengerCount, setPassengerCount] = useState(1);
+    const [currentStep, setCurrentStep] = useState(1);
+    const [error, setError] = useState('');
+
+    const handleRouteSelect = (routeKey) => {
+        setSelectedRoute(routeKey);
+        setCurrentStep(2);
+        setError('');
+    };
+
+    const handleSourceSelect = (stop) => {
         setSource(stop);
+        setCurrentStep(3);
+        setError('');
     };
 
-    const handleDestination = (stop) => {
+    const handleDestinationSelect = (stop) => {
+        if (routes[selectedRoute].stops.indexOf(stop) <= routes[selectedRoute].stops.indexOf(source)) {
+            setError('Destination must be after the boarding point');
+            return;
+        }
         setDestination(stop);
+        setCurrentStep(4);
+        setError('');
     };
 
-    const handleEmail = (e) => {
-        setEmail(e.target.value);
+    const handlePassengerChange = (e) => {
+        const count = Math.max(1, Math.min(10, parseInt(e.target.value) || 1));
+        setPassengerCount(count);
     };
 
-    const handlebook = async (e) => {
-        
+    const handleBookTicket = async () => {
         try {
-            const response = await axios.post(" http://localhost:5000/counter", { source, destination, email, routeno });
-            const {qrCode}=response.data
-            navigate("/ticketbooked",{state:{qrCode}});
-
+            const selectedRouteData = routes[selectedRoute];
+            const stopnumber = selectedRouteData.stops.indexOf(source)+1;
+            const destinationstopnumber = selectedRouteData.stops.indexOf(destination)-1;
+            
+            const response = await axios.post("http://localhost:5000/counter", { 
+                source, 
+                destination,
+                routenumber: selectedRouteData.routeno,
+                stopnumber ,
+                destinationstopnumber,
+                passengercount: passengerCount,
+                onbstats: false,
+                deonbstats: false
+            });
+            
+            navigate("/ticketbooked", { 
+                state: { 
+                    qrCode: response.data.qrCode,
+                    source,
+                    destination,
+                    routenumber: selectedRouteData.routeno,
+                    stopnumber,
+                    destinationstopnumber
+                } 
+            });
         } catch (error) {
-            console.error("Error booking ticket:", error);
+            console.error("Booking error:", error);
+            setError('Failed to book ticket. Please try again.');
         }
     };
 
     return (
-        <div className="all">
-            <div className="routes">
-                <div className="routebox" onClick={() => handleRouteChange("tk")}>
-                    <p>Thiruvanmayur TO Koyambedu</p>
+
+        <div className="wholecont"> 
+        <div className="mtc-counter-container">
+            <div className="mtc-counter-header">
+                <div className="mtc-logo">
+                    <span className="mtc-logo-red">MTC</span>
+                    <span className="mtc-logo-blue">CHENNAI</span>
                 </div>
-                <div className="routebox" onClick={() => handleRouteChange("tn")}>
-                    <p>Thiruvanmayur TO Navalur</p>
-                </div>
-                <div className="routebox" onClick={() => handleRouteChange("tm")}>
-                    <p>Thiruvanmayur TO Medavakam</p>
-                </div>
+                <h1><FaBus /> Bus Ticket Counter</h1>
             </div>
 
-            <div>
-                <h2>Select The Starting Place:</h2>
-                
-                <section className="srcbox">
-                    {route.map((stop, index) => (
-                        <div onClick={() => handleSource(stop)} key={index} className="stopname">
-                            <p>{stop}</p>
+            <div className="mtc-booking-steps">
+                {[1, 2, 3, 4].map(step => (
+                    <div key={step} className={`step ${currentStep >= step ? 'active' : ''}`}>
+                        <div className="step-number">{step}</div>
+                        <div className="step-label">
+                            {['Select Route', 'Boarding Point', 'Destination', 'Book Ticket'][step - 1]}
                         </div>
-                    ))}
-                </section>
-
-                <h2>Select The Destination</h2>
-                
-                <section className="descbox">
-                    {route.map((stop, index) => (
-                        <div onClick={() => handleDestination(stop)} key={index} className="stopname2">
-                            <p>{stop}</p>
-                        </div>
-                    ))}
-                </section>
-
-                <section className="map">
-                    <iframe
-                        src={mapUrl}
-                        width="600"
-                        height="450"
-                        style={{ border: 0 }}
-                        allowFullScreen=""
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                    ></iframe>
-                </section>
-
-                <section className="mailid">
-                    <label htmlFor="email">Mailid </label>
-                    <input type="text" value={email} onChange={handleEmail} />
-                </section>
-
-                <button onClick={handlebook}>Book Ticket</button>
+                    </div>
+                ))}
             </div>
+
+            {error && <div className="mtc-error-message">{error}</div>}
+
+            <div className="mtc-booking-container">
+                {currentStep === 1 && (
+                    <div className="mtc-route-selection">
+                        <h2><FaBus /> Select Your Bus Route</h2>
+                        <div className="mtc-route-options">
+                            {Object.keys(routes).map((routeKey) => (
+                                <div 
+                                    key={routeKey}
+                                    className={`mtc-route-option ${selectedRoute === routeKey ? 'selected' : ''}`}
+                                    onClick={() => handleRouteSelect(routeKey)}
+                                >
+                                    <h3>{routes[routeKey].name}</h3>
+                                    <p><FaTicketAlt /> {routes[routeKey].fare} <FaRupeeSign /></p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {currentStep === 2 && selectedRoute && (
+                    <div className="mtc-stop-selection">
+                        <h2><FaMapMarkerAlt /> Select Boarding Point</h2>
+                        <ul>
+                            {routes[selectedRoute].stops.map((stop, idx) => (
+                                <li key={idx} onClick={() => handleSourceSelect(stop)}>{stop}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
+                {currentStep === 3 && selectedRoute && source && (
+                    <div className="mtc-stop-selection">
+                        <h2><FaMapMarkerAlt /> Select Destination</h2>
+                        <ul>
+                            {routes[selectedRoute].stops.slice(routes[selectedRoute].stops.indexOf(source) + 1).map((stop, idx) => (
+                                <li key={idx} onClick={() => handleDestinationSelect(stop)}>{stop}</li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+
+                {currentStep === 4 && (
+                    <div className="mtc-book-ticket">
+                        <h2><FaTicketAlt /> Booking Details</h2>
+                        <p><strong>Route:</strong> {routes[selectedRoute].name}</p>
+                        <p><strong>From:</strong> {source}</p>
+                        <p><strong>To:</strong> {destination}</p>
+                        <p><strong>Route Number:</strong> {routes[selectedRoute].routeno}</p>
+                        <label>
+                            Passenger Count (1-10):
+                            <input 
+                                type="number" 
+                                value={passengerCount} 
+                                onChange={handlePassengerChange} 
+                                min="1" 
+                                max="10" 
+                            />
+                        </label>
+                        
+                        <button onClick={handleBookTicket}>Book Ticket</button>
+                    </div>
+                )}
+            </div>
+        </div>
+
         </div>
     );
 };
 
-export default Counters;
+export default Counter;

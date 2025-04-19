@@ -1,205 +1,559 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+ 
+/*Ticket booked*/
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Main Container Styles */
+.mtc-ticket-confirmation {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2c3e50;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+/* Success Header Animation */
+.mtc-confirmation-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  animation: fadeIn 0.6s ease;
 }
 
-body {
+.mtc-success-animation {
+  position: relative;
+  padding: 2rem 0;
+}
+
+.mtc-logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+}
+
+.mtc-logo-red {
+  color: #e74c3c;
+}
+
+.mtc-logo-blue {
+  color: #3498db;
+}
+
+.checkmark {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  display: block;
+}
+
+.checkmark__circle {
+  stroke: #2ecc71;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke: #2ecc71;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke-check 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+.mtc-confirmation-header h1 {
+  font-size: 2rem;
+  margin: 1rem 0 0.5rem;
+  color: #2c3e50;
+}
+
+.mtc-confirmation-subtext {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+
+/* Ticket Card Styles */
+.mtc-ticket-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 2rem;
+  animation: slideUp 0.6s ease;
+}
+
+.mtc-ticket-header {
+  background: linear-gradient(135deg, #3498db, #2ecc71);
+  color: white;
+  padding: 1.5rem;
+  position: relative;
+}
+
+.mtc-ticket-header h2 {
   margin: 0;
+  font-size: 1.5rem;
+}
+
+.mtc-ticket-meta {
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.mtc-ticket-body {
+  padding: 2rem;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+/* Route Details */
+.mtc-route-details {
+  margin-bottom: 2rem;
+}
+
+.mtc-route-stop {
+  display: flex;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px dashed #eee;
+}
+
+.mtc-route-stop:last-child {
+  border-bottom: none;
+}
+
+.mtc-stop-label {
+  font-weight: 600;
+  width: 60px;
+  color: #7f8c8d;
+}
+
+.mtc-stop-value {
+  flex: 1;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+}
+
+.mtc-route-number {
+  display: flex;
+  gap: 0.5rem;
+  background: #f8f9fa;
+  padding: 0.8rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+/* QR Code Section */
+.mtc-qr-container {
+  text-align: center;
+  margin: 2rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.mtc-qr-code {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  display: block;
+  border: 1px solid #eee;
+  padding: 10px;
+  background: white;
+}
+
+.mtc-scan-instruction {
+  margin-top: 1rem;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+/* Terms & Conditions */
+.mtc-ticket-terms {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-top: 2rem;
+}
+
+.mtc-term {
+  margin-bottom: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.mtc-term:last-child {
+  margin-bottom: 0;
+}
+
+.mtc-term span {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+/* Footer */
+.mtc-ticket-footer {
+  background: #f1f8fe;
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+/* Action Buttons */
+.mtc-action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.mtc-print-btn, .mtc-home-btn {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-form
-{
+  transition: all 0.3s ease;
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.srcbox
-{
-  display: flex;
-  gap: 20px;
-
-}
-.stopname
-{
-  padding: 30px;
-  flex-wrap: wrap;
-  border-radius: 10px;
-  color: rgb(255, 255, 255);
-  background-color: green;
-
-}
-
-.dashbut
-{
-  color: white;
-  background-color: rgb(5, 5, 110);
-  padding: 20px;
-  border-radius: 20px5;
-
-}
-
-.buttonshome
-{
-  display: flex;
-  gap: 20px;
-}
-.stopname:hover
-{
-  background-color: rgb(10, 224, 10);
-  transition: ease-in 400ms;
-}
-.map
-{
-  
-}
-iframe
-{
-  height: 300px;
-  padding: 20px;
-  border-radius: 20px;
-}
-
-.routebox
-{
-  padding: 10px;
-  border-radius: 10px;
-  background-color: rgb(7, 7, 134);
-}
-.routes
-{
-  display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 0.5rem;
 }
 
-.descbox
-{
-  display: flex;
-  gap: 20px;
-}
-
-.stopname2
-{
-  padding: 30px;
-  flex-wrap: wrap;
-  border-radius: 10px;
-  color: rgb(255, 255, 255);
-  background-color: rgb(0, 109, 128);
-}
-
-.stopname2:hover
-{
-  background-color: rgb(141, 5, 5);
-  transition: ease-in 200ms;
-}
-
-button{
-  margin: 50px;
-  background-color: green;
+.mtc-print-btn {
+  background: #2c3e50;
   color: white;
 }
 
-button:hover
-{
-  background-color: red;
-  color: black;
+.mtc-home-btn {
+  background: #ecf0f1;
+  color: #2c3e50;
 }
 
-.dashcont
-{
-  display: flex;
-  gap: 20px;
+.mtc-print-btn:hover, .mtc-home-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.mtc-print-btn:active, .mtc-home-btn:active {
+  transform: translateY(0);
+}
+
+/* Customer Care */
+.mtc-customer-care {
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.mtc-customer-care p {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes stroke-check {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .mtc-action-buttons, .mtc-customer-care {
+    display: none;
+  }
   
-  padding: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
-  box-shadow: 0px 0px   10px  white;
+  .mtc-ticket-card {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
 }
 
-.busbox
-{
+/* Responsive Design */
+@media (max-width: 600px) {
+  .mtc-ticket-confirmation {
+    padding: 0 0.5rem;
+  }
   
-  padding: 20px;
-  border-radius: 20px;
-  background-color: white;
-  color: black;
+  .mtc-logo {
+    font-size: 2rem;
+  }
+  
+  .mtc-confirmation-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .mtc-action-buttons {
+    flex-direction: column;
+  }
+  
+  .mtc-qr-code {
+    width: 180px;
+    height: 180px;
+  }
 }
 
-.busbox iframe
-{
-  height: 300px;
+
+
+
+
+
+
+ 
+
+
+ 
+
+ 
+
+/* verify*/
+
+ /* Main Container */
+.verification-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+/* Header */
+.verification-header {
+  margin-bottom: 2rem;
+}
+
+.verification-header h1 {
+  color: #2c3e50;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.verification-header p {
+  color: #7f8c8d;
+  font-size: 1rem;
+}
+
+/* QR Scanner Container */
+.qr-scanner-container {
+  position: relative;
+  margin: 0 auto;
   width: 300px;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
 }
 
-.busstat
-{
-  background-color: rgb(4, 4, 116);
-  border-radius: 30px;
-  color: white;
+#reader {
+  width: 100%;
+  height: 100%;
 }
 
-.busbox p{
-  background-color: red;
-  padding: 10px;
-  border-radius: 10px;
+/* Scanner Overlay */
+.scanner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.scanner-frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  height: 250px;
+  border: 3px solid rgba(46, 204, 113, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.4);
+}
+
+.scanner-corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-color: #2ecc71;
+  border-style: solid;
+  border-width: 0;
+}
+
+.scanner-corner-tl {
+  top: 0;
+  left: 0;
+  border-top-width: 5px;
+  border-left-width: 5px;
+}
+
+.scanner-corner-tr {
+  top: 0;
+  right: 0;
+  border-top-width: 5px;
+  border-right-width: 5px;
+}
+
+.scanner-corner-bl {
+  bottom: 0;
+  left: 0;
+  border-bottom-width: 5px;
+  border-left-width: 5px;
+}
+
+.scanner-corner-br {
+  bottom: 0;
+  right: 0;
+  border-bottom-width: 5px;
+  border-right-width: 5px;
+}
+
+/* Status Messages */
+.status-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #f8f9fa;
+  animation: fadeIn 0.5s ease;
+}
+
+.status-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.status-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.status-message {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* Different Status Colors */
+.status-success {
+  color: #2ecc71;
+  border-left: 5px solid #2ecc71;
+}
+
+.status-warning {
+  color: #f39c12;
+  border-left: 5px solid #f39c12;
+}
+
+.status-error {
+  color: #e74c3c;
+  border-left: 5px solid #e74c3c;
+}
+
+/* Action Buttons */
+.action-buttons {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.btn {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #3498db, #2980b9);
   color: white;
+  box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+}
+
+.btn-secondary {
+  background: #ecf0f1;
+  color: #2c3e50;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+.loading-text {
+  animation: pulse 1.5s infinite;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .verification-container {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .qr-scanner-container {
+    width: 280px;
+    height: 280px;
+  }
+  
+  .scanner-frame {
+    width: 220px;
+    height: 220px;
+  }
 }

@@ -1,0 +1,326 @@
+/* Counter.css */
+
+
+
+
+
+/* Base Styles */
+.mtc-counter-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    color: #333;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+    min-height: 100vh;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Header Styles */
+  .mtc-counter-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+  
+  .mtc-counter-header h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .mtc-logo {
+    font-family: 'Arial Black', sans-serif;
+    font-size: 2.8rem;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .mtc-logo-red {
+    color: #e74c3c;
+  }
+  
+  .mtc-logo-blue {
+    color: #3498db;
+  }
+  
+  /* Steps Indicator */
+  .mtc-booking-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+  
+  .mtc-booking-steps::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #ecf0f1;
+    z-index: 1;
+  }
+  
+  .step {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    flex: 1;
+  }
+  
+  .step-number {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 0.5rem;
+    background: #bdc3c7;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: all 0.3s ease;
+  }
+  
+  .step.active .step-number {
+    background: #3498db;
+    transform: scale(1.1);
+  }
+  
+  .step-label {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+  }
+  
+  .step.active .step-label {
+    color: #2c3e50;
+    font-weight: bold;
+  }
+  
+  /* Error Message */
+  .mtc-error-message {
+    background: #e74c3c;
+    color: white;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    text-align: center;
+    animation: shake 0.5s ease;
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+  }
+  
+  /* Booking Container */
+  .mtc-booking-container {
+    background: white;
+    border-radius: 10px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    min-height: 400px;
+  }
+  
+  /* Route Selection */
+  .mtc-route-selection h2 {
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .mtc-route-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .mtc-route-option {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .mtc-route-option:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: #3498db;
+  }
+  
+  .mtc-route-option.selected {
+    background: #e3f2fd;
+    border-color: #3498db;
+  }
+  
+  .mtc-route-option h3 {
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+  }
+  
+  .mtc-route-option p {
+    color: #7f8c8d;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+  }
+  
+  /* Stop Selection */
+  .mtc-stop-selection h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .mtc-stop-selection ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 400px;
+    overflow-y: auto;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+  }
+  
+  .mtc-stop-selection li {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .mtc-stop-selection li:hover {
+    background: #f8f9fa;
+    transform: translateX(5px);
+  }
+  
+  .mtc-stop-selection li:last-child {
+    border-bottom: none;
+  }
+  
+  /* Book Ticket Section */
+  .mtc-book-ticket {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .mtc-book-ticket h2 {
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .mtc-book-ticket p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+  }
+  
+  .mtc-book-ticket strong {
+    color: #2c3e50;
+  }
+  
+  .mtc-book-ticket label {
+    display: block;
+    margin: 2rem 0 1rem;
+    font-weight: bold;
+    color: #2c3e50;
+  }
+  
+  .mtc-book-ticket input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .mtc-book-ticket input:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+  }
+  
+  .mtc-book-ticket button {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 2rem;
+    transition: all 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .mtc-book-ticket button:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(41, 128, 185, 0.3);
+  }
+  
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #bdc3c7;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #95a5a6;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .mtc-counter-container {
+      padding: 1rem;
+    }
+    
+    .mtc-counter-header h1 {
+      font-size: 2rem;
+    }
+    
+    .mtc-logo {
+      font-size: 2rem;
+    }
+    
+    .mtc-route-options {
+      grid-template-columns: 1fr;
+    }
+    
+    .step-label {
+      font-size: 0.8rem;
+    }
+  }
